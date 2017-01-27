@@ -1,0 +1,479 @@
+[1] pry(main)> b = Brewery.new name: "BrewDog", year: 2007
+=> #<Brewery:0x00000002762b48
+ id: nil,
+ name: "BrewDog",
+ year: 2007,
+ created_at: nil,
+ updated_at: nil>
+[2] pry(main)> b.save
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "breweries" ("name", "year", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "BrewDog"], ["year", 2007], ["created_at", 2017-01-27 13:05:35 UTC], ["updated_at", 2017-01-27 13:05:35 UTC]]
+   (6.1ms)  commit transaction
+=> true
+[3] pry(main)> Breweries.all
+NameError: uninitialized constant Breweries
+from (pry):3:in `__pry__'
+[4] pry(main)> Brewery.all
+  Brewery Load (0.1ms)  SELECT "breweries".* FROM "breweries"
+=> [#<Brewery:0x00000003c4b780
+  id: 1,
+  name: "Koff",
+  year: 1897,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Brewery:0x00000003c41938
+  id: 2,
+  name: "Malmgard",
+  year: 2001,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Brewery:0x00000003c417d0
+  id: 3,
+  name: "Weihenstephaner",
+  year: 1042,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Brewery:0x00000003c41668
+  id: 6,
+  name: "BrewDog",
+  year: 2007,
+  created_at: Fri, 27 Jan 2017 13:05:35 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:05:35 UTC +00:00>]
+[5] pry(main)> Beer.all
+  Beer Load (0.1ms)  SELECT "beers".* FROM "beers"
+=> [#<Beer:0x000000039f8438
+  id: 1,
+  name: "Iso 3",
+  style: "Lager",
+  brewery_id: 1,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Beer:0x000000039f8258
+  id: 2,
+  name: "Karhu",
+  style: "Lager",
+  brewery_id: 1,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Beer:0x000000039f8118
+  id: 3,
+  name: "Tuplahumala",
+  style: "Lager",
+  brewery_id: 1,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Beer:0x000000039f8370
+  id: 4,
+  name: "Huvila Pale Ale",
+  style: "Pale Ale",
+  brewery_id: 2,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Beer:0x000000039f9770
+  id: 5,
+  name: "X Porter",
+  style: "Porter",
+  brewery_id: 2,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Beer:0x000000039fa6e8
+  id: 6,
+  name: "Hefeweizen",
+  style: "Weizen",
+  brewery_id: 3,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Beer:0x000000039dbdd8
+  id: 7,
+  name: "Helles",
+  style: "Lager",
+  brewery_id: 3,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Beer:0x000000039dbbf8
+  id: 8,
+  name: "Lite",
+  style: "Lager",
+  brewery_id: 1,
+  created_at: Wed, 18 Jan 2017 12:44:59 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:44:59 UTC +00:00>,
+ #<Beer:0x000000039db9f0
+  id: 9,
+  name: "IVB",
+  style: "Lager",
+  brewery_id: 1,
+  created_at: Wed, 18 Jan 2017 12:45:54 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:45:54 UTC +00:00>,
+ #<Beer:0x000000039db720
+  id: 10,
+  name: "Extra Light Triple Brewed",
+  style: "Lager",
+  brewery_id: 1,
+  created_at: Wed, 18 Jan 2017 12:46:31 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:46:31 UTC +00:00>]
+[6] pry(main)> beer = Beer.new name: "Punk IPA", style: "IPA"
+=> #<Beer:0x00000003639040
+ id: nil,
+ name: "Punk IPA",
+ style: "IPA",
+ brewery_id: nil,
+ created_at: nil,
+ updated_at: nil>
+[7] pry(main)> b << beer
+NoMethodError: undefined method `<<' for #<Brewery:0x00000002762b48>
+from /home/jussi/Code/ruby/ratebeer/vendor/bundle/ruby/2.4.0/gems/activemodel-5.0.1/lib/active_model/attribute_methods.rb:433:in `method_missing'
+[8] pry(main)> b.beers << beer
+   (0.1ms)  begin transaction
+  SQL (0.4ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Punk IPA"], ["style", "IPA"], ["brewery_id", 6], ["created_at", 2017-01-27 13:08:45 UTC], ["updated_at", 2017-01-27 13:08:45 UTC]]
+   (5.8ms)  commit transaction
+  Beer Load (0.1ms)  SELECT "beers".* FROM "beers" WHERE "beers"."brewery_id" = ?  [["brewery_id", 6]]
+=> [#<Beer:0x00000003639040
+  id: 15,
+  name: "Punk IPA",
+  style: "IPA",
+  brewery_id: 6,
+  created_at: Fri, 27 Jan 2017 13:08:45 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:08:45 UTC +00:00>]
+[9] pry(main)> b
+=> #<Brewery:0x00000002762b48
+ id: 6,
+ name: "BrewDog",
+ year: 2007,
+ created_at: Fri, 27 Jan 2017 13:05:35 UTC +00:00,
+ updated_at: Fri, 27 Jan 2017 13:05:35 UTC +00:00>
+[10] pry(main)> b.beers.create name: "Nanny State", style: "lowalcohol"
+   (0.1ms)  begin transaction
+  SQL (0.4ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Nanny State"], ["style", "lowalcohol"], ["brewery_id", 6], ["created_at", 2017-01-27 13:10:02 UTC], ["updated_at", 2017-01-27 13:10:02 UTC]]
+   (5.9ms)  commit transaction
+=> #<Beer:0x007f28fc7d8e18
+ id: 16,
+ name: "Nanny State",
+ style: "lowalcohol",
+ brewery_id: 6,
+ created_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00,
+ updated_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00>
+[11] pry(main)> b.beers
+=> [#<Beer:0x00000003639040
+  id: 15,
+  name: "Punk IPA",
+  style: "IPA",
+  brewery_id: 6,
+  created_at: Fri, 27 Jan 2017 13:08:45 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:08:45 UTC +00:00>,
+ #<Beer:0x007f28fc7d8e18
+  id: 16,
+  name: "Nanny State",
+  style: "lowalcohol",
+  brewery_id: 6,
+  created_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00>]
+[12] pry(main)> b
+=> #<Brewery:0x00000002762b48
+ id: 6,
+ name: "BrewDog",
+ year: 2007,
+ created_at: Fri, 27 Jan 2017 13:05:35 UTC +00:00,
+ updated_at: Fri, 27 Jan 2017 13:05:35 UTC +00:00>
+[13] pry(main)> b.beers
+=> [#<Beer:0x00000003639040
+  id: 15,
+  name: "Punk IPA",
+  style: "IPA",
+  brewery_id: 6,
+  created_at: Fri, 27 Jan 2017 13:08:45 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:08:45 UTC +00:00>,
+ #<Beer:0x007f28fc7d8e18
+  id: 16,
+  name: "Nanny State",
+  style: "lowalcohol",
+  brewery_id: 6,
+  created_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00>]
+[14] pry(main)> punk = b.beers.first
+=> #<Beer:0x00000003639040
+ id: 15,
+ name: "Punk IPA",
+ style: "IPA",
+ brewery_id: 6,
+ created_at: Fri, 27 Jan 2017 13:08:45 UTC +00:00,
+ updated_at: Fri, 27 Jan 2017 13:08:45 UTC +00:00>
+[15] pry(main)> punk
+=> #<Beer:0x00000003639040
+ id: 15,
+ name: "Punk IPA",
+ style: "IPA",
+ brewery_id: 6,
+ created_at: Fri, 27 Jan 2017 13:08:45 UTC +00:00,
+ updated_at: Fri, 27 Jan 2017 13:08:45 UTC +00:00>
+[16] pry(main)> punk.ratings
+  Rating Load (0.1ms)  SELECT "ratings".* FROM "ratings" WHERE "ratings"."beer_id" = ?  [["beer_id", 15]]
+=> []
+[17] pry(main)> punk.ratings.create score: 33
+   (0.1ms)  begin transaction
+  SQL (0.6ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 33], ["beer_id", 15], ["created_at", 2017-01-27 13:11:52 UTC], ["updated_at", 2017-01-27 13:11:52 UTC]]
+   (6.5ms)  commit transaction
+=> #<Rating:0x00000003919af8
+ id: 4,
+ score: 33,
+ beer_id: 15,
+ created_at: Fri, 27 Jan 2017 13:11:52 UTC +00:00,
+ updated_at: Fri, 27 Jan 2017 13:11:52 UTC +00:00>
+[18] pry(main)> punk.ratings
+=> [#<Rating:0x00000003919af8
+  id: 4,
+  score: 33,
+  beer_id: 15,
+  created_at: Fri, 27 Jan 2017 13:11:52 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:11:52 UTC +00:00>]
+[19] pry(main)> punk.ratings.create score: 24
+   (0.1ms)  begin transaction
+  SQL (0.1ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 24], ["beer_id", 15], ["created_at", 2017-01-27 13:12:10 UTC], ["updated_at", 2017-01-27 13:12:10 UTC]]
+   (6.2ms)  commit transaction
+=> #<Rating:0x00000003753390
+ id: 5,
+ score: 24,
+ beer_id: 15,
+ created_at: Fri, 27 Jan 2017 13:12:10 UTC +00:00,
+ updated_at: Fri, 27 Jan 2017 13:12:10 UTC +00:00>
+[20] pry(main)> nanny = b.beers.last
+=> #<Beer:0x007f28fc7d8e18
+ id: 16,
+ name: "Nanny State",
+ style: "lowalcohol",
+ brewery_id: 6,
+ created_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00,
+ updated_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00>
+[21] pry(main)> nanny = Beer.where name: "Nanny State"
+  Beer Load (0.2ms)  SELECT "beers".* FROM "beers" WHERE "beers"."name" = ?  [["name", "Nanny State"]]
+=> [#<Beer:0x0000000362eff0
+  id: 16,
+  name: "Nanny State",
+  style: "lowalcohol",
+  brewery_id: 6,
+  created_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00>]
+[22] pry(main)> nanny
+=> [#<Beer:0x0000000362eff0
+  id: 16,
+  name: "Nanny State",
+  style: "lowalcohol",
+  brewery_id: 6,
+  created_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00>]
+[23] pry(main)> nanny.ratings.create score: 2
+NoMethodError: undefined method `ratings' for #<Beer::ActiveRecord_Relation:0x0000000363b458>
+from /home/jussi/Code/ruby/ratebeer/vendor/bundle/ruby/2.4.0/gems/activerecord-5.0.1/lib/active_record/relation/delegation.rb:123:in `method_missing'
+[24] pry(main)> Beer.all
+  Beer Load (0.1ms)  SELECT "beers".* FROM "beers"
+=> [#<Beer:0x000000028b6af8
+  id: 1,
+  name: "Iso 3",
+  style: "Lager",
+  brewery_id: 1,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Beer:0x000000028b6738
+  id: 2,
+  name: "Karhu",
+  style: "Lager",
+  brewery_id: 1,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Beer:0x000000028b6530
+  id: 3,
+  name: "Tuplahumala",
+  style: "Lager",
+  brewery_id: 1,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Beer:0x000000028b5338
+  id: 4,
+  name: "Huvila Pale Ale",
+  style: "Pale Ale",
+  brewery_id: 2,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Beer:0x000000028b5108
+  id: 5,
+  name: "X Porter",
+  style: "Porter",
+  brewery_id: 2,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Beer:0x000000028b4d48
+  id: 6,
+  name: "Hefeweizen",
+  style: "Weizen",
+  brewery_id: 3,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Beer:0x000000028b4910
+  id: 7,
+  name: "Helles",
+  style: "Lager",
+  brewery_id: 3,
+  created_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:38:58 UTC +00:00>,
+ #<Beer:0x000000028b6508
+  id: 8,
+  name: "Lite",
+  style: "Lager",
+  brewery_id: 1,
+  created_at: Wed, 18 Jan 2017 12:44:59 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:44:59 UTC +00:00>,
+ #<Beer:0x000000028af5f0
+  id: 9,
+  name: "IVB",
+  style: "Lager",
+  brewery_id: 1,
+  created_at: Wed, 18 Jan 2017 12:45:54 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:45:54 UTC +00:00>,
+ #<Beer:0x000000028aeba0
+  id: 10,
+  name: "Extra Light Triple Brewed",
+  style: "Lager",
+  brewery_id: 1,
+  created_at: Wed, 18 Jan 2017 12:46:31 UTC +00:00,
+  updated_at: Wed, 18 Jan 2017 12:46:31 UTC +00:00>,
+ #<Beer:0x000000028ae060
+  id: 15,
+  name: "Punk IPA",
+  style: "IPA",
+  brewery_id: 6,
+  created_at: Fri, 27 Jan 2017 13:08:45 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:08:45 UTC +00:00>,
+ #<Beer:0x000000028adbd8
+  id: 16,
+  name: "Nanny State",
+  style: "lowalcohol",
+  brewery_id: 6,
+  created_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00>]
+[25] pry(main)> nanny.ratings
+NoMethodError: undefined method `ratings' for #<Beer::ActiveRecord_Relation:0x0000000363b458>
+from /home/jussi/Code/ruby/ratebeer/vendor/bundle/ruby/2.4.0/gems/activerecord-5.0.1/lib/active_record/relation/delegation.rb:123:in `method_missing'
+[26] pry(main)> punk.ratings
+=> [#<Rating:0x00000003919af8
+  id: 4,
+  score: 33,
+  beer_id: 15,
+  created_at: Fri, 27 Jan 2017 13:11:52 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:11:52 UTC +00:00>,
+ #<Rating:0x00000003753390
+  id: 5,
+  score: 24,
+  beer_id: 15,
+  created_at: Fri, 27 Jan 2017 13:12:10 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:12:10 UTC +00:00>]
+[27] pry(main)> nanny.save
+NoMethodError: undefined method `save' for #<Beer::ActiveRecord_Relation:0x0000000363b458>
+from /home/jussi/Code/ruby/ratebeer/vendor/bundle/ruby/2.4.0/gems/activerecord-5.0.1/lib/active_record/relation/delegation.rb:123:in `method_missing'
+[28] pry(main)> nanny
+=> [#<Beer:0x0000000362eff0
+  id: 16,
+  name: "Nanny State",
+  style: "lowalcohol",
+  brewery_id: 6,
+  created_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00>]
+[29] pry(main)> db:migrate
+NoMethodError: undefined method `db' for main:Object
+from (pry):29:in `__pry__'
+[30] pry(main)> reload!
+Reloading...
+=> true
+[31] pry(main)> nanny
+=> [#<Beer:0x0000000362eff0
+  id: 16,
+  name: "Nanny State",
+  style: "lowalcohol",
+  brewery_id: 6,
+  created_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00>]
+[32] pry(main)> nanny.
+Display all 359 possibilities? (y or n)
+[32] pry(main)> nanny.ratings
+NoMethodError: undefined method `ratings' for #<Beer::ActiveRecord_Relation:0x0000000363b458>
+from /home/jussi/Code/ruby/ratebeer/vendor/bundle/ruby/2.4.0/gems/activerecord-5.0.1/lib/active_record/relation/delegation.rb:123:in `method_missing'
+[33] pry(main)> nanny = b.beers.last
+=> #<Beer:0x007f28fc7d8e18
+ id: 16,
+ name: "Nanny State",
+ style: "lowalcohol",
+ brewery_id: 6,
+ created_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00,
+ updated_at: Fri, 27 Jan 2017 13:10:02 UTC +00:00>
+[34] pry(main)> nanny.ratings
+  Rating Load (0.2ms)  SELECT "ratings".* FROM "ratings" WHERE "ratings"."beer_id" = ?  [["beer_id", 16]]
+=> []
+[35] pry(main)> nanny.ratings.create score: 12
+   (0.1ms)  begin transaction
+  SQL (0.1ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 12], ["beer_id", 16], ["created_at", 2017-01-27 13:17:55 UTC], ["updated_at", 2017-01-27 13:17:55 UTC]]
+   (4.5ms)  commit transaction
+=> #<Rating:0x007f28fc0793c0
+ id: 6,
+ score: 12,
+ beer_id: 16,
+ created_at: Fri, 27 Jan 2017 13:17:55 UTC +00:00,
+ updated_at: Fri, 27 Jan 2017 13:17:55 UTC +00:00>
+[36] pry(main)> nanny.ratings
+=> [#<Rating:0x007f28fc0793c0
+  id: 6,
+  score: 12,
+  beer_id: 16,
+  created_at: Fri, 27 Jan 2017 13:17:55 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:17:55 UTC +00:00>]
+[37] pry(main)> nanny.ratings.create score: 2
+   (0.1ms)  begin transaction
+  SQL (0.1ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 2], ["beer_id", 16], ["created_at", 2017-01-27 13:18:18 UTC], ["updated_at", 2017-01-27 13:18:18 UTC]]
+   (6.1ms)  commit transaction
+=> #<Rating:0x00000003c07878
+ id: 7,
+ score: 2,
+ beer_id: 16,
+ created_at: Fri, 27 Jan 2017 13:18:18 UTC +00:00,
+ updated_at: Fri, 27 Jan 2017 13:18:18 UTC +00:00>
+[38] pry(main)> nanny.ratings
+=> [#<Rating:0x007f28fc0793c0
+  id: 6,
+  score: 12,
+  beer_id: 16,
+  created_at: Fri, 27 Jan 2017 13:17:55 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:17:55 UTC +00:00>,
+ #<Rating:0x00000003c07878
+  id: 7,
+  score: 2,
+  beer_id: 16,
+  created_at: Fri, 27 Jan 2017 13:18:18 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:18:18 UTC +00:00>]
+[39] pry(main)> punk.ratings.create score: 19
+   (0.1ms)  begin transaction
+  SQL (0.1ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 19], ["beer_id", 15], ["created_at", 2017-01-27 13:19:13 UTC], ["updated_at", 2017-01-27 13:19:13 UTC]]
+   (5.6ms)  commit transaction
+=> #<Rating:0x00000003aaa660
+ id: 8,
+ score: 19,
+ beer_id: 15,
+ created_at: Fri, 27 Jan 2017 13:19:13 UTC +00:00,
+ updated_at: Fri, 27 Jan 2017 13:19:13 UTC +00:00>
+[40] pry(main)> punk.ratings
+=> [#<Rating:0x00000003919af8
+  id: 4,
+  score: 33,
+  beer_id: 15,
+  created_at: Fri, 27 Jan 2017 13:11:52 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:11:52 UTC +00:00>,
+ #<Rating:0x00000003753390
+  id: 5,
+  score: 24,
+  beer_id: 15,
+  created_at: Fri, 27 Jan 2017 13:12:10 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:12:10 UTC +00:00>,
+ #<Rating:0x00000003aaa660
+  id: 8,
+  score: 19,
+  beer_id: 15,
+  created_at: Fri, 27 Jan 2017 13:19:13 UTC +00:00,
+  updated_at: Fri, 27 Jan 2017 13:19:13 UTC +00:00>]
+[41] pry(main)> 
+

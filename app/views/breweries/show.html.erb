@@ -23,5 +23,9 @@
  <% end %>
 </p>
 
+<p>
+  <%= 'Has ' + pluralize(@brewery.ratings.size, 'rating') + ', average ' + @brewery.average_rating.to_s %>
+</p>
+
 <%= link_to 'Edit', edit_brewery_path(@brewery) %> |
-<%= link_to 'Back', breweries_path %>
+<!-- <%= link_to 'Back', breweries_path %> -->

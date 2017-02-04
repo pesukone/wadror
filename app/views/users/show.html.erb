@@ -2,15 +2,25 @@
 
 <h2><%= @user.username %></h2>
 
-<%= 'has made ' + pluralize(@user.ratings.size, 'rating') + ', average ' + @user.average_rating.to_s %>
+<p>
+	<%= 'has made ' + pluralize(@user.ratings.size, 'rating') + ', average ' + @user.average_rating.to_s %>
+</p>
+
+<p>
+	member of 
+	<% @user.beer_clubs.each do |club| %>
+		<%= link_to club.name, club %>
+	<% end %>
+</p>
 
 <h3>ratings</h3>
 
-<u1>
+<ul>
 	<% @user.ratings.each do |rating| %>
 		<li><%= rating %> <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %></li>
 	<% end %>
 	<br>
-	<%= link_to 'Edit', edit_user_path(@user) %> |
-	<%= link_to 'Back', users_path %>
-</u1>
+</ul>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

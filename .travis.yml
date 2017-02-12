@@ -13,3 +13,5 @@ deploy:
   app: powerful-cove-88973
   on:
     repo: pesukone/wadror
+dist: trusty
+sudo: required

@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+- 2.4.0
+script:
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
+deploy:
+  provider: heroku
+  api_key:
+    secure: p8i8g+EPhaHz24/KpmoNt+MXZntiFJUMruB2gntHtGw8nWYn9qM3TR3O1X2bis9tcLAgHtcFUsoNOxA7+tcueMiVOkwTmrJV5jlwbe44UTy7QEf9jIFhfsXvQAgmzgCE17egUE/abesNT/D8uvvK781nG1iAilVIGYfV4E0IP3Y1RFKRG8mOZeN4Bgx/ZTQyOJvv8XOkPtgO9JR6sEOPIP5hyKVtKFT0E13LMOavZR+8krUdMPooTiM+NcOklxaLIZ0EO/01wczLARPOb5chJkAINcFZClC1YbtKVspmwwdQwcR1EVRuso5ZmwMPbi1XVhoo3bk1Z2rCvCdbZMr27xeMFtw4l204P5tTDxQQauPhlurrULSVzPyNwUFCbdTumt52Q1OBd+U4EIhir/50fS5B3Zhw62ldw+XSHZRpOPpF35MKSLuEr/Dffwh0nyPk0utAvu5PyA1XuuSUQJZsz5M4mIWoDhw5FqWBn1wDz7JLfUS9W83ohZXpXtG6O0kj1/xgvFpleltcR63Vhg3E5j4PcjlddH4d7f4+OyT1eQ5/Kjrn753tY2d1/wZFbpwqbXsEea7P36Tv8A3ztoXbr0OSIiCxJX7Ci60qTgSve7OtZ9JQhmPcrGbY0IzDzVExXAuFcDWeSSlSj8YfL/G8vgZKWpzQYRlKl3nS6tYwsK0=
+  app: powerful-cove-88973
+  on:
+    repo: pesukone/wadror

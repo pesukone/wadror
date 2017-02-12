@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
- gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -57,11 +57,18 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'rspec-rails', '~> 3.5'
 end
 
 group :production do
   gem 'pg'
   gem 'rails_12factor'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 ruby '2.4.0'

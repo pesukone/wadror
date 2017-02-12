@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 describe "Beer" do
+    before :each do
+    	FactoryGirl.create(:user)
+    	sign_in(username:"Pekka", password:"Foobar1")
+    end
+
     it "is saved with a valid name" do
     	visit new_beer_path
 	fill_in('beer[name]', with:'kalja')

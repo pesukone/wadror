@@ -13,8 +13,7 @@ class RatingsController < ApplicationController
 	
 	if current_user.nil?
 	    redirect_to signin_path, notice:'you should be signed in'
-	elsif @rating.save
-	    current_user.ratings << @rating
+	elsif current_user.ratings << @rating
 	    redirect_to user_path current_user
 	else
 	    @beers = Beer.all
@@ -25,6 +24,6 @@ class RatingsController < ApplicationController
     def destroy
         rating = Rating.find(params[:id])
         rating.delete if current_user == rating.user
-        redirect_to :back
+        redirect_back(fallback_location: root_path)
     end
 end

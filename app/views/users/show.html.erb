@@ -15,15 +15,21 @@
 
 <p>
 	favorite beer: 
-	<%= link_to @user.favorite_beer, @user.favorite_beer %>
+	<% if @user.favorite_beer %>
+		<%= link_to @user.favorite_beer, @user.favorite_beer %>
+	<% end %>
 	<br>
 
 	favorite style:
-	<%= @user.favorite_style %>
+	<% if @user.favorite_style %>
+		<%= @user.favorite_style %>
+	<% end %>
 	<br>
 
 	favorite brewery:
-	<%= link_to @user.favorite_brewery.name, @user.favorite_brewery %>
+	<% if @user.favorite_brewery %>
+		<%= link_to @user.favorite_brewery, @user.favorite_brewery %>
+	<% end %>
 </p>
 
 <h3>ratings</h3>

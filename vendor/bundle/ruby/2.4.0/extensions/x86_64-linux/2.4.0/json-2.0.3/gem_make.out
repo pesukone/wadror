@@ -1,0 +1,13 @@
+current directory: /home/jussi/Code/ruby/ratebeer/vendor/bundle/ruby/2.4.0/gems/json-2.0.3/ext/json
+/usr/bin/ruby -r ./siteconf20170212-10772-1hxueuo.rb extconf.rb 
+creating Makefile
+
+current directory: /home/jussi/Code/ruby/ratebeer/vendor/bundle/ruby/2.4.0/gems/json-2.0.3/ext/json
+make "DESTDIR=" clean
+
+current directory: /home/jussi/Code/ruby/ratebeer/vendor/bundle/ruby/2.4.0/gems/json-2.0.3/ext/json
+make "DESTDIR="
+make: Nothing to be done for 'all'.
+
+current directory: /home/jussi/Code/ruby/ratebeer/vendor/bundle/ruby/2.4.0/gems/json-2.0.3/ext/json
+make "DESTDIR=" install

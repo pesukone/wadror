@@ -58,6 +58,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-its'
 end
 
 group :production do
@@ -69,6 +70,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
+  gem 'simplecov', require: false
 end
 
 ruby '2.4.0'

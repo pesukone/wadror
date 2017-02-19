@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<h2>List of styles</h2>
+<br>
+
+<p>
+    <ul>
+        <% @styles.each do |style| %>
+	    <li> <%= link_to style, style_path(style) %> </li>
+	<% end %>
+    </ul>
+</p>

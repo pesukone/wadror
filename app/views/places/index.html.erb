@@ -1,30 +1,44 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Beer places search</h1>
-
 <%= form_tag places_path do %>
     city <%= text_field_tag :city, params[:city] %>
     <%= submit_tag "Search" %>
 <% end %>
+<p>
+    <% if @weather %>
+    	<h4>The current beer weather in <%= params[:city] %></h4>
 
-<% if @places %>
-    <ul>
-    	<% @places.each do |place| %>
-    	    <li><%= link_to place.name, place_path(place.id) %></li>
-	<% end %>
-    </ul>
-<!--    <table>
-    	<thead>
-	    <% Place.rendered_fields.each do |f| %>
-	    	<td><%= f %></td>
-	    <% end %>
-	</thead>
-	<% @places.each do |place| %>
-	    <tr>
+    	<%= image_tag "http:#{@weather['current']['condition']['icon']}" %>
+    	<br>
+
+    	<%= @weather['current']['temp_c'] %> Celsius
+    	<br>
+
+    	<strong>wind: </strong>
+    	<%= @weather['current']['wind_kph'] %> km/h, direction
+    	<%= @weather['current']['wind_dir'] %>
+    	<br>
+    <% end %>
+</p>
+
+<p>
+    <% if @places %>
+    	<h4>Places to get your beer</h4>
+
+    	<table>
+    	    <thead>
 	    	<% Place.rendered_fields.each do |f| %>
-		    <td><%= place.send(f) %></td>
-		<% end %>
-	    </tr>
-	<% end %>
-    </table> -->
-<% end %>
+	    	    <td><%= f %></td>
+	    	<% end %>
+	    </thead>
+	    <% @places.each do |place| %>
+	    	<tr>
+	            <td><%= link_to place.name, place_path(place.id) %></td>
+	    	    <% Place.rendered_fields.drop(1).each do |f| %>
+		    	<td><%= place.send(f) %></td>
+		    <% end %>
+	    	</tr>
+	    <% end %>
+    	</table> 
+    <% end %>
+</p>

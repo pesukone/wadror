@@ -22,7 +22,7 @@ class User < ApplicationRecord
 	
 	def favorite_style
 		return nil if ratings.empty?
-		ratings.joins(:beer).order(score: :desc).group(:style).average(:score).first.first
+		Style.find_by style: ratings.joins(beer: :style).order(score: :desc).group(:style).average(:score).first.first
 	end
 
 	def favorite_brewery

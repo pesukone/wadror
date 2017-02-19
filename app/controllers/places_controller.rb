@@ -1,5 +1,6 @@
 # Tämä rivi tarvitaan jotta api toimii herokussa ja travisissa
 require 'beermapping_api'
+require 'weather_api'
 
 class PlacesController < ApplicationController
     def index

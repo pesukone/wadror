@@ -6,6 +6,8 @@ describe "Places" do
 	    [ Place.new( name:"Oljenkorsi", id: 1, street:"Jokukatu", zip:12345, city:"kumpula" ) ]
 	)
 
+	allow(WeatherApi).to receive(:weather_in)
+
 	visit places_path
 	fill_in('city', with: 'kumpula')
 	click_button "Search"
@@ -19,6 +21,8 @@ describe "Places" do
 	      Place.new( name:"Ruorimies", id: 2 ) ]
 	)
 
+	allow(WeatherApi).to receive(:weather_in)
+
 	visit places_path
 	fill_in('city', with: 'soukka')
 	click_button "Search"
@@ -29,6 +33,8 @@ describe "Places" do
 
     it "if none returned by the API, a message is shown" do
     	allow(BeermappingApi).to receive(:places_in).with("jupperi").and_return([])
+
+	allow(WeatherApi).to receive(:weather_in)
 
 	visit places_path
 	fill_in('city', with: 'jupperi')

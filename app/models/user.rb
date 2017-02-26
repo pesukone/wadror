@@ -22,12 +22,17 @@ class User < ApplicationRecord
 	
 	def favorite_style
 		return nil if ratings.empty?
-		Style.find_by style: ratings.joins(beer: :style).order(score: :desc).group(:style).average(:score).first.first
+		Style.find_by name: ratings.joins(beer: :style).order(score: :desc).group('styles.name').average(:score).first.first
 	end
 
 	def favorite_brewery
 		return nil if ratings.empty?
 		Brewery.find_by name: ratings.joins(beer: :brewery).order(score: :desc).group('breweries.name').average(:score).first.first
+	end
+
+	def self.top(n)
+		sorted_by_number_of_ratings_in_desc_order = User.all.sort_by{ |u| -(u.ratings.count||0) }
+		sorted_by_number_of_ratings_in_desc_order[0, n]
 	end
 end
 

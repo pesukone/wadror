@@ -61,6 +61,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def toggle_ban
+    user = User.find(params[:id])
+    user.update_attribute :banned, (not user.banned)
+
+    new_status = user.banned? ? "frozen" : "reactivated"
+
+    redirect_back(fallback_location: root_path, notice: "The user account has been #{new_status}")
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

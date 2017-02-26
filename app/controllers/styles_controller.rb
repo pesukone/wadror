@@ -1,6 +1,7 @@
 class StylesController < ApplicationController
   before_action :set_style, only: [:show, :edit, :update, :destroy]
   before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_admin, only: :destroy
 
   def index
     @styles = Style.all
@@ -56,6 +57,6 @@ class StylesController < ApplicationController
     end
 
     def style_params
-      params.require(:style).permit(:style, :description)
+      params.require(:style).permit(:name, :description)
     end
 end

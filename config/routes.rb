@@ -24,4 +24,12 @@ Rails.application.routes.draw do
 
   resources :places, only:[:index, :show]
   post 'places', to: 'places#search'
+
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
+
+  resources :users do
+    post 'toggle_ban', on: :member
+  end
 end

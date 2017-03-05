@@ -1,13 +1,21 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_signed_in, except: [:index, :show, :list]
   before_action :ensure_that_admin, only: :destroy
 
   # GET /breweries
   # GET /breweries.json
   def index
+    @breweries = Brewery.all
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
+
+    order = params[:order] || 'name'
+    last = session[:ordered_last] || nil
+
+    @active_breweries = sort_breweries(order, last, @active_breweries)
+
+    @retired_breweries = sort_breweries(order, last, @retired_breweries)
   end
 
   # GET /breweries/1
@@ -64,6 +72,9 @@ class BreweriesController < ApplicationController
     end
   end
 
+  def list
+  end
+
   def toggle_activity
     brewery = Brewery.find(params[:id])
     brewery.update_attribute :active, (not brewery.active)
@@ -83,5 +94,26 @@ class BreweriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def brewery_params
       params.require(:brewery).permit(:name, :year, :active)
+    end
+
+    def sort_breweries(order, last, breweries)
+      case order
+        when 'name' then
+	  if last == order
+	    session[:ordered_last] = nil
+	    return breweries.sort_by{ |b| b.name }.reverse
+	  else
+	    session[:ordered_last] = order
+	    return breweries.sort_by{ |b| b.name }
+	  end
+	when 'year' then
+	  if last == order
+	    session[:ordered_last] = nil
+	    return breweries.sort_by{ |b| b.year }.reverse
+	  else
+	    session[:ordered_last] = order
+	    return breweries.sort_by{ |b| b.year }
+	  end
+      end
     end
 end

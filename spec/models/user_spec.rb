@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
     it "has the username set correctly" do
-        user = User.new username:"Pekka"
+        user = User.new name:"Pekka"
 
-	expect(user.username).to eq("Pekka")
+	expect(user.name).to eq("Pekka")
     end
 
     it "is not saved without a password" do
-    	user = User.create username:"Pekka"
+    	user = User.create name:"Pekka"
 
 	expect(user).not_to be_valid
 	expect(User.count).to eq(0)
@@ -32,14 +32,14 @@ RSpec.describe User, type: :model do
     end
 
     it "is not saved with a too short password" do
-    	user = User.create username:"Pekka", password:"asd", password_confirmation:"asd"
+    	user = User.create name:"Pekka", password:"asd", password_confirmation:"asd"
 
 	expect(user).to_not be_valid
 	expect(User.count).to eq(0)
     end
 
     it "is not saved with a password, which has no numbers" do
-        user = User.create username:"Pekka", password:"Salasana", password_confirmation:"Salasana"
+        user = User.create name:"Pekka", password:"Salasana", password_confirmation:"Salasana"
 
 	expect(user).to_not be_valid
 	expect(User.count).to eq(0)

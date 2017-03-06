@@ -7,14 +7,14 @@ describe "User" do
     
     describe "who has signed up" do
     	it "can signin with right credentials" do
-	    sign_in(username:"Pekka", password:"Foobar1")
+	    sign_in(name:"Pekka", password:"Foobar1")
 
 	    expect(page).to have_content 'Welcome back!'
 	    expect(page).to have_content 'Pekka'
 	end
 
 	it "is redirected back to signin form if wrong cedentials given" do
-	    sign_in(username:"Pekka", password:"wrong")
+	    sign_in(name:"Pekka", password:"wrong")
 
 	    expect(current_path).to eq(signin_path)
 	    expect(page).to have_content 'Username and/or password mismatch'
@@ -23,7 +23,7 @@ describe "User" do
     
     it "when signed up with good credentials, is added to the system" do
     	visit signup_path
-	fill_in('user_username', with:'Brian')
+	fill_in('user_name', with:'Brian')
 	fill_in('user_password', with:'Secret55')
 	fill_in('user_password_confirmation', with:'Secret55')
 
@@ -63,7 +63,7 @@ describe "Users" do
     end
 
     it "page shows the ratings made by the user" do
-	toinen = FactoryGirl.create(:user, username:"Jonne")
+	toinen = FactoryGirl.create(:user, name:"Jonne")
 	create_beers_with_ratings(toinen, 23, 21)
 
     	visit user_path user
@@ -75,7 +75,7 @@ describe "Users" do
     end
 
     it "rating is deleted from database when delete button is pressed" do
-        sign_in(username:"Pekka", password:"Foobar1")
+        sign_in(name:"Pekka", password:"Foobar1")
     	visit user_path user
 
 	expect{

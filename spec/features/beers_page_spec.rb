@@ -4,7 +4,7 @@ describe "Beer" do
     before :each do
     	FactoryGirl.create(:user)
 	FactoryGirl.create(:style)
-    	sign_in(username:"Pekka", password:"Foobar1")
+    	sign_in(name:"Pekka", password:"Foobar1")
     end
 
     it "is saved with a valid name" do

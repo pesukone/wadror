@@ -9,7 +9,7 @@ describe "Rating" do
     let!(:user) { FactoryGirl.create(:user) }
 
     before :each do
-    	sign_in(username:"Pekka", password:"Foobar1")
+    	sign_in(name:"Pekka", password:"Foobar1")
     end
 
     it "when given, is registered to the beer and user who is signed in" do

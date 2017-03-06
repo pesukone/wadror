@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170226134822) do
+ActiveRecord::Schema.define(version: 20170306183254) do
 
   create_table "beer_clubs", force: :cascade do |t|
     t.string   "name"
@@ -40,8 +40,9 @@ ActiveRecord::Schema.define(version: 20170226134822) do
   create_table "memberships", force: :cascade do |t|
     t.integer  "beer_club_id"
     t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "confirmed",    default: false, null: false
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -58,12 +59,14 @@ ActiveRecord::Schema.define(version: 20170226134822) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username"
+    t.string   "name"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.string   "password_digest"
     t.boolean  "admin",           default: false
     t.boolean  "banned",          default: false
+    t.boolean  "github",          default: false, null: false
+    t.index ["name"], name: "index_users_on_name"
   end
 
 end

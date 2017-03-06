@@ -1,10 +1,11 @@
 class RatingsController < ApplicationController
     def index
     	@ratings = Rating.all
-	@top_beers = Beer.top(3).compact
-	@top_breweries = Brewery.top(3).compact
-	@top_users = User.top(3).compact
-	@top_styles = Style.top(3).compact
+	UpdateRatings.new.perform if Rails.cache.read("beer top 3") == nil
+	@top_beers = Rails.cache.read "beer top 3"
+	@top_breweries = Rails.cache.read "brewery top 3"
+	@top_users = Rails.cache.read "user top 3"
+	@top_styles = Rails.cache.read "style top 3"
 	@recent_ratings = Rating.recent.compact
     end
 

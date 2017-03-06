@@ -17,14 +17,23 @@ Founded: <%= @beer_club.founded %>
     <% if not current_user.memberships.where(beer_club: @beer_club).exists? %>
     	<%= form_for(@membership) do |f| %>
     	    <%= f.hidden_field :beer_club_id %>
-	    <%= f.submit value:"join the club" %>
+	    <%= f.submit value:"join the club", class:'btn btn-primary' %>
        	<% end %>
     <% else %>
     	<%= form_for(@membership, method: "delete") do |f| %>
 	    <%= f.hidden_field :beer_club_id %>
 	    <%= f.submit value: "end the membership", class:'btn btn-danger' %>
 	<% end %>
+	<% if !@unconfirmed.empty? %>
+	    <h3>Outstanding applications</h3>
+	    <ul>
+	        <% @unconfirmed.each do |candidate| %>
+	            <li><%= link_to candidate.user.username, candidate %> <%= link_to "confirm", confirm_membership_path(candidate), method: :post, class: "btn btn-primary" %></li>
+	        <% end %>
+	    </ul>
+	<% end %>
     <% end %>
 
-    <%= link_to 'Edit', edit_beer_club_path(@beer_club), class:'btn btn-primary' if current_user %> 
+    <br>
+    <%= edit_and_destroy_buttons(@beer_club) %>
 <% end %>

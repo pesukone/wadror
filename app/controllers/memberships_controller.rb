@@ -70,6 +70,14 @@ class MembershipsController < ApplicationController
     end
   end
 
+  def confirm
+    membership = Membership.find(params[:id])
+    membership.update_attribute :confirmed, true
+
+    flash[:notice] = "application accepted"
+    redirect_back fallback_location: root_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_membership

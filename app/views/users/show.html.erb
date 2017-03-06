@@ -1,6 +1,6 @@
 <!-- <p id="notice"><%= notice %></p> -->
 
-<h2><%= @user.username %>
+<h2><%= @user.name %>
   <% if @user.banned? %>
     <span class="label label-info">account frozen</span>
   <% end %>
@@ -18,10 +18,21 @@
   <% end %>
 <% end %>
 <p>
-	member of 
-	<% @user.beer_clubs.each do |club| %>
-		<%= link_to club.name, club %>
-	<% end %>
+  member of 
+  <ul>
+    <% @user.beer_clubs.each do |club| %>
+      <li> <%= link_to club.name, club %> </li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
+  applied membership of
+  <ul>
+    <% @applications.each do |application| %>
+      <li> <%= link_to application.beer_club.name, application.beer_club %> </li>
+    <% end %>
+  </ul>
 </p>
 
 <p>

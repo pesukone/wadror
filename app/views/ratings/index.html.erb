@@ -26,7 +26,7 @@ Number of ratings : <%= @ratings.count %>
 
 <ul>
   <% @recent_ratings.each do |rating| %>
-    <li><%= rating %> <%= link_to rating.user.username, rating.user %></li>
+    <li><%= rating %> <%= link_to rating.user.name, rating.user %></li>
   <% end %>
 </ul>
 

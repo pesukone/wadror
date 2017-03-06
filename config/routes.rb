@@ -35,4 +35,10 @@ Rails.application.routes.draw do
   
   get 'beerlist', to:'beers#list'
   get 'brewerylist', to:'breweries#list'
+
+  resources :memberships do
+    post 'confirm', on: :member
+  end
+
+  get 'auth/:provider/callback', to: 'sessions#create_oauth'
 end

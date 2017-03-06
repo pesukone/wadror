@@ -4,12 +4,13 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.includes(:beers, :ratings).all
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    @applications = Membership.where(user_id: @user.id, confirmed: false)
   end
 
   # GET /users/new
@@ -25,6 +26,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    binding.pry
 
     respond_to do |format|
       if @user.save
@@ -78,6 +80,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation)
+      params.require(:user).permit(:name, :password, :password_confirmation, :github)
     end
 end

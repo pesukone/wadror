@@ -1,13 +1,13 @@
 class User < ApplicationRecord
 	include RatingAverage
 
-	validates :username, uniqueness: true,
-			     length: { in: 3..30 }
+	validates :name, uniqueness: true,
+			     length: { in: 3..30 }, unless: :github?
 
-	has_secure_password
-	validates :password, length: { minimum: 4 }
-	validates :password, format: { with: /\d/, message: "has to include a number" }
-	validates :password, format: { with: /[A-ZÅÄÖ]/, message: "has to include a capital letter" }
+	has_secure_password validations: false
+	validates :password, length: { minimum: 4 }, unless: :github?
+	validates :password, format: { with: /\d/, message: "has to include a number" }, unless: :github?
+	validates :password, format: { with: /[A-ZÅÄÖ]/, message: "has to include a capital letter" }, unless: :github?
 
 	has_many :ratings, dependent: :destroy 
 	has_many :beers, through: :ratings

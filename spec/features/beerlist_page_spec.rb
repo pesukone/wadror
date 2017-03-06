@@ -4,9 +4,9 @@ describe "Beerlist page" do
   before :all do
     self.use_transactional_fixtures = false
     WebMock.disable_net_connect!(allow_localhost:true)
-    #Capybara.register_driver :selenium do |app|
-      #Capybara::Selenium::Driver.new(app, :browser => :chrome)
-    #end
+    Capybara.register_driver :selenium do |app|
+      Capybara::Selenium::Driver.new(app, browser: :chrome)
+    end
   end
 
   before :each do
@@ -32,20 +32,20 @@ describe "Beerlist page" do
     self.use_transactional_fixtures = true
   end
 
-  it "shows one known beer", js:true do
+  it "shows one known beer", js: true do
     visit beerlist_path
     find('table').find('tr:nth-child(2)')
     expect(page).to have_content "Nikolai"
   end
 
-  it "orders beers by name by default", js:true do
+  it "orders beers by name by default", js: true do
     visit beerlist_path
     expect(find('table').find('tr:nth-child(2)')).to have_content @beer2.name
     expect(find('table').find('tr:nth-child(3)')).to have_content @beer3.name
     expect(find('table').find('tr:nth-child(4)')).to have_content @beer1.name
   end
 
-  it "can order beers by style", js:true do
+  it "can order beers by style", js: true do
     visit beerlist_path
     click_link('Style')
 
@@ -54,7 +54,7 @@ describe "Beerlist page" do
     expect(find('table').find('tr:nth-child(4)')).to have_content @style3.name
   end
 
-  it "can order beers by brewery", js:true do
+  it "can order beers by brewery", js: true do
     visit beerlist_path
     click_link('Brewery')
 

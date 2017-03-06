@@ -39,6 +39,7 @@ gem 'httparty'
 gem 'rack-mini-profiler'
 gem 'sucker_punch', '~> 2.0'
 gem 'omniauth-github'
+gem 'jquery-turbolinks'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
